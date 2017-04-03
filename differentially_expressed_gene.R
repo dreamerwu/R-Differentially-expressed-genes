@@ -2,7 +2,7 @@
 #Usage: screen differentially expressed genes
 library("affy") #use affy package to do background correcting & Normalizing & Calculating expression
 library("limma") #use limma package to find differentially expressed genes
-data=ReadAffy(celfile="~/../../..") #read .CEL files into data
+data=ReadAffy(celfile.path="~/../../..") #read .CEL files into data
 eset=rma(data) #use rma to normalize data
 design=model.matrix(~ 0+factor(c(1,1,1,1,0,0,0,0)))
 colnames(design)=c("group1","group2")

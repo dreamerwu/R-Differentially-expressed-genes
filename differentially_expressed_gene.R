@@ -47,6 +47,17 @@ data=read.delim("~/Desktop/TJ_DEG.txt",head=T,sep="\t")
 data2=data[,2:ncol(data)]
 pheatmap(data2,colorRampPalette(c("green","black","red"))(50))
 
+# ggplot plotting pathway enrichment
+library("ggplot2")
+data=read.delim("~/Desktop/TJ_DEG.txt",head=T,sep="\t")
+ls(data)
+data$Gene_Set_Name=factor(data$Gene_Set_Name,levels=data$Gene_Set_Name)
+p=ggplot(data,aes(y=overlapped_gene_number,x=Gene_Set_Name,fill=group))+theme_bw()
+pp=p+geom_bar(stat="identity")+coord_flip()
+pp+theme(text=element_text(size=8))
+
+
+
 
 
 

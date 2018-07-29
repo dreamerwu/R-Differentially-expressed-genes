@@ -28,6 +28,27 @@ fit3=eBayes(fit2)
 result=topTable(fit3,number=60000,adjust.method="BH",p.value=1,lfc=0)
 write.csv(result,"~/Desktop/result.csv")
 
+# zscore transformation of gene expression data 
+data=read.delim("~/Desktop/TJ_DEG.txt",head=T,sep="\t")
+n=ncol(data)
+output=matrix(data=NA,6)
+
+i=2
+for (i in 2:n){
+    number=data[,i:i]
+    zscore=(number-mean(number))/sd(number)
+    output=cbind(output,zscore)
+}
+write.csv(output,"~/Desktop/zscore.csv")
+
+## pheatmap plotting gene expression
+library("pheatmap")
+data=read.delim("~/Desktop/TJ_DEG.txt",head=T,sep="\t")
+data2=data[,2:ncol(data)]
+pheatmap(data2,colorRampPalette(c("green","black","red"))(50))
+
+
+
 
 
 
